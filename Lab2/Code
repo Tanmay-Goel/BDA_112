@@ -1,0 +1,24 @@
+use test
+db.createCollection("Employee");
+db.createCollection("Department");
+
+db.Employee.insertMany([{_id:1, Name: "ABC", Age:29, DID:1001}, {_id:2, Name: "BCD", Age:25, DID:1006}, {_id:3, Name: "ABD", Age:31, DID:1002}]) 
+db.Employee.update({_id:4}, {_id:4, Name:"ACD", Name:"ACD", Age:35, DID: 1003}, {upsert:true})
+db.Employee.save({Name:"CDE", Age:30, DID:1004})
+
+db.Department.insertMany([{_id:1001, Name:"XYZ"}, {_id:1002, Name:"TUV"}, {_id:1003, Name:"UVW"}])
+db.Department.update({_id:1004},{_id:1004, Name:"PQR"}, {upsert:true})
+db.Department.save({Name:"LMN"})
+
+db.Employee.find()
+db.Department.find()
+
+db.Employee.update({_id:1}, {$set:{Salary:10000}}) #adding field salary
+db.Employee.update({_id:1}, {$unset:{Salary:""}})  #removing field salary
+
+db.Employee.find({DID:{$gt:1000, $lt:1006}},{Name:true,DID:true})
+db.Employee.find({Age:{$gt:30}})
+db.Employee.find({Name:{$regex:"^A"}})
+
+
+
