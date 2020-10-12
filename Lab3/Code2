@@ -15,7 +15,7 @@ db.Customers.aggregate([{$group:
     {
         "_id": "$custid",
         "maxBalance": {$max: "$AccBal"},
-        "minBalance": {$min: "$AccBal"},
+        "minBalance": {$min: "$AccBal"}
     }
 }])
 
