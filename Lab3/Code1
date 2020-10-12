@@ -1,0 +1,16 @@
+use test
+db.createCollection("Student");
+db.Student.insert({_id:1, name:"ABC", rollno:11, contact:99999, email:"abc@email.com"})
+db.Student.insert({_id:2, name:"XYZ", rollno:10, contact:88888, email:"XYZ@email.com"})
+db.Student.insert({_id:3, name:"LMN", rollno:12, contact:77777, email:"lmn@email.com"})
+db.Student.find({})
+
+db.Student.update({rollno:10},{$set:{email:"xyz@email.com"}})
+
+db.Student.update({rollno:11},{$set:{name:"FEM"}})
+
+mongoexport --db test --collection Student --csv --fields ID,Name,RollNo,Contact,Email --out d:\StudentData.csv 
+
+mongoimport -d test -c Student --type csv --file d:/StudentData.csv --headerline
+
+db.Student.drop()
