@@ -1,0 +1,13 @@
+CREATE KEYSPACE library WITH REPLICATION = {'class':'SimpleStrategy','replication_factor':1};
+USE library;
+CREATE COLUMNFAMILY library_info (stud_id int,counter_value counter, stud_name VARCHAR,book_name VARCHAR,book_id int,DOI VARCHAR,PRIMARY KEY(student_id,student_name,book_name,book_id,DOI));
+BEGIN BATCH 
+UPDATE library_info SET counter_value = counter_value+1 WHERE stud_id=114 and stud_name='Ayush' AND book_name='SQM' and book_id=141 and DOI='1/2/2020';
+UPDATE library_info SET counter_value = counter_value+1 WHERE stud_id=111 and stud_name='Anjali' AND book_name='DSR' and book_id=131 and DOI='1/2/2020'; 
+UPDATE library_info SET counter_value = counter_value+1 WHERE stud_id=113 and stud_name='Meghna' AND book_name='BDA' and book_id=121 and DOI='1/2/2020'; 
+APPLY BATCH;
+SELECT * FROM library_info; UPDATE library_info SET counter_value = counter_value+1 WHERE stud_id=112 and stud_name='meghna' AND book_name='BDA' and book_id=122 and DOI='1/2/2020’
+SELECT book_name,counter_value FROM library_info WHERE stud_id=112;
+COPY library_info (stud_id,counter_value,stud_name,book_name,book_id, DOI) TO 'C\Users\desktop\BDA\library_information.csv';
+COPY library_info(stud_id,counter_value,stud_name,book_name,book_id, DOI) FROM 'C\Users\Desktop\library_information.csv';
+SELECT * FROM library_info;
